@@ -1,0 +1,33 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-tenant notes app",
+  "scripts": {
+    "dev": "next dev -p 18024",
+    "build": "next build",
+    "start": "next start -p 18024",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down -v",
+    "db:migrate": "prisma migrate deploy",
+    "seed": "node prisma/seed.mjs",
+    "setup": "prisma generate && prisma migrate deploy && node prisma/seed.mjs && next build"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "bcryptjs": "3.0.3",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prisma": "6.19.3",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "preset": "hasura",
+  "holes": [
+    { "id": "H1", "family": "anon-privileged-op", "file": "metadata/actions.yaml", "symbols": ["purgeOrgNotes", "purge-org-notes", "purge"] },
+    { "id": "H2", "family": "write-guard-gap", "file": "metadata/databases/default/tables/public_notes.yaml", "symbols": ["update_notes", "update_permissions", "post-update check"] },
+    { "id": "H3", "family": "missing-guard", "file": "metadata/databases/default/tables/public_memberships.yaml", "symbols": ["public_memberships", "memberships select", "memberships table"] },
+    { "id": "H4", "family": "idor-unscoped-query", "file": "metadata/databases/default/tables/public_notes.yaml", "symbols": ["notes_by_pk", "select_permissions on notes", "notes select"] },
+    { "id": "H5", "family": "secret-over-share", "file": "metadata/databases/default/tables/public_users.yaml", "symbols": ["api_token"] }
+  ]
+}

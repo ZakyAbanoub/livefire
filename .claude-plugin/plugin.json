@@ -1,0 +1,21 @@
+{
+  "name": "livefire",
+  "description": "Verify by exploiting, not by reading — pre-merge security/feature verification that runs the exploit against a live DB from three actor positions. Stack-agnostic via 16 presets.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Abanoub Zaky"
+  },
+  "homepage": "https://github.com/ZakyAbanoub/livefire",
+  "repository": "https://github.com/ZakyAbanoub/livefire",
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "audit",
+    "verification",
+    "rls",
+    "authz",
+    "pre-merge",
+    "supabase",
+    "skills"
+  ]
+}

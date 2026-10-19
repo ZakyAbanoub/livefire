@@ -1,0 +1,8 @@
+body { font-family: system-ui, sans-serif; margin: 0; color: #1f2328; background: #fff; }
+main { max-width: 42rem; margin: 0 auto; padding: 1.5rem 1rem; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+form { display: grid; gap: 0.5rem; margin: 1rem 0; }
+input, textarea, button { font: inherit; padding: 0.4rem 0.6rem; }
+textarea { min-height: 6rem; }
+.meta { color: #59636e; font-size: 0.9rem; }
+.error { color: #b42318; }

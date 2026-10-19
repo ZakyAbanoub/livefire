@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: notes
+      POSTGRES_PASSWORD: notes
+      POSTGRES_DB: notes
+    ports:
+      - "15422:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notes -d notes"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  actions:
+    build: ./actions
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+      HASURA_GRAPHQL_URL: http://hasura:8080/v1/graphql
+      HASURA_ADMIN_SECRET: notesadminsecret
+      JWT_SIGNING_KEY: 9c4b7e2f1a8d3605e7b94c2f8a1d6e3b5c0f9a7d2e4b8c61
+      JWT_TTL_SECONDS: "3600"
+
+  hasura:
+    image: hasura/graphql-engine:v2.48.1.cli-migrations-v3
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      actions:
+        condition: service_started
+    ports:
+      - "18022:8080"
+    volumes:
+      - ./migrations:/hasura-migrations
+      - ./metadata:/hasura-metadata
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://notes:notes@postgres:5432/notes
+      PG_DATABASE_URL: postgres://notes:notes@postgres:5432/notes
+      HASURA_GRAPHQL_ADMIN_SECRET: notesadminsecret
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256","key":"9c4b7e2f1a8d3605e7b94c2f8a1d6e3b5c0f9a7d2e4b8c61"}'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      ACTIONS_BASE_URL: http://actions:3000
+
+volumes:
+  pgdata:

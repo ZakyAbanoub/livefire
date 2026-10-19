@@ -1,0 +1,4 @@
+- "!include public_memberships.yaml"
+- "!include public_notes.yaml"
+- "!include public_orgs.yaml"
+- "!include public_users.yaml"

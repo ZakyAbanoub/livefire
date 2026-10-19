@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  owner
+  member
+}
+
+model Org {
+  id          Int          @id @default(autoincrement())
+  name        String
+  memberships Membership[]
+  notes       Note[]
+
+  @@map("orgs")
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  email        String       @unique
+  passwordHash String       @map("password_hash")
+  apiToken     String       @unique @map("api_token")
+  memberships  Membership[]
+  notes        Note[]
+
+  @@map("users")
+}
+
+model Membership {
+  userId Int  @map("user_id")
+  orgId  Int  @map("org_id")
+  role   Role @default(member)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  org    Org  @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@id([userId, orgId])
+  @@map("memberships")
+}
+
+model Note {
+  id       Int    @id @default(autoincrement())
+  orgId    Int    @map("org_id")
+  authorId Int    @map("author_id")
+  title    String
+  body     String @default("")
+  org      Org    @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  author   User   @relation(fields: [authorId], references: [id])
+
+  @@map("notes")
+}

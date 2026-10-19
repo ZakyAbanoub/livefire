@@ -1,0 +1,70 @@
+table:
+  name: notes
+  schema: public
+object_relationships:
+  - name: author
+    using:
+      foreign_key_constraint_on: author_id
+  - name: org
+    using:
+      foreign_key_constraint_on: org_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        org:
+          memberships:
+            user_id:
+              _eq: X-Hasura-User-Id
+      set:
+        author_id: x-hasura-User-Id
+      columns:
+        - body
+        - org_id
+        - title
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - author_id
+        - body
+        - id
+        - org_id
+        - title
+      filter:
+        org:
+          memberships:
+            user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - body
+        - org_id
+        - title
+      filter:
+        org:
+          memberships:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check:
+        org:
+          memberships:
+            user_id:
+              _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _or:
+          - author_id:
+              _eq: X-Hasura-User-Id
+          - org:
+              memberships:
+                _and:
+                  - user_id:
+                      _eq: X-Hasura-User-Id
+                  - role:
+                      _eq: owner

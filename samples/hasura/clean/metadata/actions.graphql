@@ -1,0 +1,23 @@
+type Mutation {
+  login(
+    email: String!
+    password: String!
+  ): LoginOutput
+}
+
+type Mutation {
+  purgeOrgNotes(
+    orgId: Int!
+  ): PurgeOrgNotesOutput
+}
+
+type LoginOutput {
+  token: String!
+  userId: Int!
+  apiToken: String!
+}
+
+type PurgeOrgNotesOutput {
+  orgId: Int!
+  deleted: Int!
+}

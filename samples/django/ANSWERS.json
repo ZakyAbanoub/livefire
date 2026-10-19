@@ -1,0 +1,10 @@
+{
+  "preset": "django",
+  "holes": [
+    { "id": "H1", "family": "anon-privileged-op", "file": "orgs/admin_views.py", "symbols": ["OrgPurgeView", "/purge"] },
+    { "id": "H2", "family": "write-guard-gap", "file": "notes/serializers.py", "symbols": ["NoteUpdateSerializer", "PATCH /notes", "mass-assign"] },
+    { "id": "H3", "family": "missing-guard", "file": "orgs/views.py", "symbols": ["OrgMemberListView", "/members"] },
+    { "id": "H4", "family": "idor-unscoped-query", "file": "notes/views.py", "symbols": ["NoteViewSet.retrieve", "GET /notes/", "unscoped retrieve"] },
+    { "id": "H5", "family": "secret-over-share", "file": "accounts/serializers.py", "symbols": ["TeammateSerializer", "GET /users", "api_token", "__all__"] }
+  ]
+}

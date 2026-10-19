@@ -1,0 +1,32 @@
+{
+  "name": "livefire",
+  "version": "0.1.0",
+  "description": "Verify by exploiting, not by reading \u2014 pre-merge security/feature verification that runs the exploit against a live DB from three actor positions. Stack-agnostic via presets.",
+  "type": "module",
+  "bin": {
+    "livefire-prompt": "./skills/livefire/livefire-prompt.mjs"
+  },
+  "scripts": {
+    "build": "node skills/livefire/build.mjs",
+    "check": "node skills/livefire/build.mjs && node skills/livefire/check.mjs",
+    "test": "node skills/livefire/src/safety.test.mjs && node skills/livefire/src/detect.test.mjs && node skills/livefire/src/single-agent.test.mjs && node test/budget.test.mjs && node test/pipeline.test.mjs && node test/agnostic.test.mjs && node test/parity.test.mjs && node test/score.test.mjs && node test/tokens.test.mjs && node test/session-cost.test.mjs",
+    "prompt": "node skills/livefire/livefire-prompt.mjs",
+    "install-skill": "node install-skill.mjs",
+    "args": "node skills/livefire/livefire-args.mjs",
+    "tokens": "node tools/tokens.mjs",
+    "cost": "node tools/session-cost.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "security",
+    "audit",
+    "verification",
+    "rls",
+    "supabase",
+    "authz",
+    "pre-merge"
+  ],
+  "license": "MIT"
+}

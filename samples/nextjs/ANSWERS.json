@@ -1,0 +1,10 @@
+{
+  "preset": "nextjs",
+  "holes": [
+    { "id": "H1", "family": "anon-privileged-op", "file": "app/api/admin/orgs/[orgId]/purge/route.ts", "symbols": ["/purge"] },
+    { "id": "H2", "family": "write-guard-gap", "file": "app/actions/notes.ts", "symbols": ["updateNote", "mass-assign"] },
+    { "id": "H3", "family": "missing-guard", "file": "app/api/orgs/[orgId]/members/route.ts", "symbols": ["/members"] },
+    { "id": "H4", "family": "idor-unscoped-query", "file": "app/notes/[id]/page.tsx", "symbols": ["NotePage", "/notes/[id]"] },
+    { "id": "H5", "family": "secret-over-share", "file": "app/api/users/route.ts", "symbols": ["GET /api/users", "api_token", "apiToken"] }
+  ]
+}

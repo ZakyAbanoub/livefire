@@ -1,0 +1,10 @@
+{
+  "preset": "express",
+  "holes": [
+    { "id": "H1", "family": "anon-privileged-op", "file": "src/routes/admin.js", "symbols": ["purgeOrgNotes", "/purge"] },
+    { "id": "H2", "family": "write-guard-gap", "file": "src/routes/notes.js", "symbols": ["updateNote", "PATCH /notes", "mass-assign"] },
+    { "id": "H3", "family": "missing-guard", "file": "src/routes/orgs.js", "symbols": ["listMembers", "/members"] },
+    { "id": "H4", "family": "idor-unscoped-query", "file": "src/routes/notes.js", "symbols": ["getNote", "GET /notes/"] },
+    { "id": "H5", "family": "secret-over-share", "file": "src/routes/users.js", "symbols": ["listTeammates", "GET /users", "api_token", "apiToken"] }
+  ]
+}

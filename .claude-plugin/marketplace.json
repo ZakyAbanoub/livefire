@@ -1,0 +1,18 @@
+{
+  "name": "livefire",
+  "description": "Marketplace for the livefire verification & security-audit skill",
+  "owner": {
+    "name": "Abanoub Zaky"
+  },
+  "plugins": [
+    {
+      "name": "livefire",
+      "description": "Verify by exploiting, not by reading — live-DB, three-actor pre-merge security/feature verification. Stack-agnostic via 16 presets.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Abanoub Zaky"
+      }
+    }
+  ]
+}

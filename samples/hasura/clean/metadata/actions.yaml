@@ -1,0 +1,22 @@
+actions:
+  - name: login
+    definition:
+      kind: synchronous
+      handler: '{{ACTIONS_BASE_URL}}/login'
+    permissions:
+      - role: anonymous
+    comment: Exchange email and password for a JWT
+  - name: purgeOrgNotes
+    definition:
+      kind: synchronous
+      handler: '{{ACTIONS_BASE_URL}}/purge-org-notes'
+    permissions:
+      - role: user
+    comment: Delete every note of an organisation
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: LoginOutput
+    - name: PurgeOrgNotesOutput
+  scalars: []
